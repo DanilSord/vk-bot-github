@@ -1,0 +1,31 @@
+{
+  "name": "GitBot",
+  "version": "1.0.0",
+  "description": "Notifications for VK from GitHub",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanilSord/GitBot.git"
+  },
+  "keywords": [
+    "node-vk-bot-api",
+    "DanilSord"
+  ],
+  "author": "DanilSord",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanilSord/GitBot/issues"
+  },
+  "homepage": "https://github.com/DanilSord/GitBot#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-vk-bot-api": "^3.3.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
