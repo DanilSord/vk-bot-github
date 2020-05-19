@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 setRoutes(app);
 connectDB();
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Hello from VkBot by DanilSord');
 });
 
