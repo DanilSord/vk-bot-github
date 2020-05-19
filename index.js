@@ -1,7 +1,29 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
+const { PORT, CONFIRMATION } = require('./config');
+
 const app = express();
-const {PORT} = require('./config.js');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.get('/', (req, res) => res.send('Hello world'));
+app.get('/', (req, res) => res.send('Hello World!'));
+app.post('/', (req, res) => {
+  const { body } = req;
+  switch (body.type) {
+    case 'confirmation':
+      res.end(CONFIRMATION);
+      break;
 
-app.listen(PORT, () => console.log(`Example listening on port ${PORT}`));
+    case 'message_new':
+      console.log(body);
+      res.end('ok');
+      break;
+
+    default:
+      res.end('ok');
+      break;
+  }
+});
+
+app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
