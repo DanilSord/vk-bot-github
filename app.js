@@ -1,13 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
-const { PORT, CONFIRMATION } = require('./config');
-
+const { PORT, CONFIRMATION } = require('./config/config.js');
 const app = express();
+const setRoutes = require('./routes/routes.js');
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+setRoutes(app);
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('*', (req, res) => {
+  res.send('Hello from VkBot by DanilSord');
+});
+
 app.post('/', (req, res) => {
   const { body } = req;
   switch (body.type) {

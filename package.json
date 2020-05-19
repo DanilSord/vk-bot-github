@@ -2,10 +2,10 @@
   "name": "GitBot",
   "version": "1.0.0",
   "description": "Notifications for VK from GitHub",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",

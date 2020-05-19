@@ -3,7 +3,8 @@
     "env": {
       "NODE_ENV": "development",
       "PORT": 80,
-      "CONFIRMATION": "5d49e449"
+      "CONFIRMATION": "c0340312",
+      "mongoURI": "mongodb+srv://admin:K3DXXpFJVH8cJlTj@cluster0-w001j.mongodb.net/test?retryWrites=true&w=majority"
     },
     "ext": ".js,.json",
     "watch": "./"
