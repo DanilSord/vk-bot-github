@@ -4,7 +4,10 @@
       "NODE_ENV": "development",
       "PORT": 80,
       "CONFIRMATION": "c0340312",
-      "mongoURI": "mongodb+srv://admin:K3DXXpFJVH8cJlTj@cluster0-w001j.mongodb.net/test?retryWrites=true&w=majority"
+      "mongoURI": "mongodb+srv://admin:K3DXXpFJVH8cJlTj@cluster0-w001j.mongodb.net/test?retryWrites=true&w=majority",
+      "TOKEN": "d8f0a44cf6c0604e66eb19671bcbc193c7c7568056ea284714a1fe3184c635a886dab93ccc3f474d25573",
+      "SENDMETHOD" : "https://api.vk.com/method/messages.send",
+      "APIVERSION" : "5.103"
     },
     "ext": ".js,.json",
     "watch": "./"
