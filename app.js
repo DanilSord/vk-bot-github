@@ -6,7 +6,7 @@ const connectDB = require('./models/connectDB.js');
 const { PORT } = require('./config/config.js');
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}))
 setRoutes(app);
 connectDB();
 
