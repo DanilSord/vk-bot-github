@@ -7,7 +7,7 @@ module.exports.processCommits = async function(req, res)
     let dataString = `${body.repository.name}"\nВетка: ".${body.ref}."\nПользователь: ".${body.pusher.name}."\n\nКоммиты:\n"`;
 
     for(const index in body.commits)
-        dataString += `${index}) ${body.commits[index].message} - ${body.commits[index].committer.name}\n`;
+        dataString += `${index}) ${body.commits[index].message} - ${body.commits[index].committer.username ? body.commits[index].committer.username : body.commits[index].committer.name}\n`;
     
     sendMessageFromRepository(dataString, body.repository.url);
 
