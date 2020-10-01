@@ -4,15 +4,68 @@ const send = require('../utils/sendMessage');
 module.exports.processAction = function( req, res )
 {
     const body = req.body
-
-    if( !!body.commits.length ) {
-        processCommits( body )
-    } else if ( !!body.pull_request ) {
-        
+    switch ( req.headers[ 'x-github-event' ] ) {
+        case 'push':
+            processCommits( body )
+            res.send( 'ok' )
+            break
+        case 'pull_request':
+            processPullRequest( body )
+            res.send( 'ok' )
+            break
+        case 'create':
+            processCreate( body )
+            res.send( 'ok' )
+            break
+        case 'pull_request_review':
+            processRequestReview( body )
+            res.send( 'ok' )
+            break
+        case 'issue_comment':
+            processIssueComment( body )
+            res.send( 'ok' )
+            break
+        case 'pull_request_review_comment':
+            processPullRequestReviewComment( body )
+            res.send( 'ok' )
+            break
     }
-            
+}
 
-    res.send( 'ok' )
+function processPullRequestReviewComment( body ) {
+    let data = `|---PULL-REQUEST-REVIEW-COMMENT---|\nREPOSITORY: ${ body.repository.name }\nUSER: ${ body.sender.login }\nTARGET-BRANCH: ${ body.pull_request.base.ref }\n BRANCH: ${ body.pull_request.head.ref }\n TITLE: ${ body.pull_request.title }\nCOMMENT: ${ body.commment.body }`
+
+    switch ( body.action ) {
+        case 'created':
+            sendMessageFromRepository( data, body.repository.html_url )
+            break
+    }    
+}
+
+function processIssueComment( body ) {
+    let data = `|---ISSUE-COMMENT---|\nREPOSITORY: ${ body.repository.name }\nUSER: ${ body.sender.login }\nTITLE: ${ body.issue.title }\nREVIEW: ${ body.comment.body }\n`
+
+    switch ( body.action ) {
+        case 'created':
+            sendMessageFromRepository( data, body.repository.html_url )
+            break
+    }    
+}
+
+function processRequestReview( body ) {
+    let data = `|---PULL-REQUEST-REVIEW---|\nREPOSITORY: ${ body.repository.name }\nUSER: ${ body.sender.login }\nTARGET-BRANCH: ${ body.pull_request.base.ref }\n BRANCH: ${ body.pull_request.head.ref }\n TITLE: ${ body.pull_request.title }\nREVIEW: ${ body.review.body }\nSTATE: ${ body.review.state }`
+
+    switch ( body.action ) {
+        case 'submitted':
+            sendMessageFromRepository( data, body.repository.html_url )
+            break
+    }    
+}
+
+function processCreate( body ) {
+    let data = `|---CREATE-${ body.ref_type.toUpperCase() }---|\nREPOSITORY: ${ body.repository.name }\nUSER: ${ body.sender.login }\nBRANCH: ${ body.ref }\n`
+
+    sendMessageFromRepository( data, body.repository.html_url )
 }
 
 function processPullRequest( body ) {
@@ -20,16 +73,16 @@ function processPullRequest( body ) {
 
     switch ( body.action ) {
         case 'opened': 
-            sendMessageFromRepository( data, body.repository.url )
-            break;
+            sendMessageFromRepository( data, body.repository.html_url )
+            break
         case 'edited':
             data += `CHANGES-TITLE: ${ body.changes.title ? body.changes.title.from || '' : '' }\nCHANGES-BODY: ${ body.changes.body ? body.changes.body.from || '' : '' }\n`
-            sendMessageFromRepository( data, body.repository.url )
-            break;
+            sendMessageFromRepository( data, body.repository.html_url )
+            break
         case 'closed':
             data += `NOW IS CLOSED`
-            sendMessageFromRepository( data, body.repository.url )
-            break;      
+            sendMessageFromRepository( data, body.repository.html_url )
+            break      
     }
 }
 
@@ -39,7 +92,7 @@ function processCommits( body ) {
     for( const index in body.commits )
         dataString += `${ index }) ${ body.commits[ index ].message } - ${ body.commits[ index ].committer.username ? body.commits[ index ].committer.username : body.commits[ index ].committer.name }\n`
     
-    sendMessageFromRepository( dataString, body.repository.url )
+    sendMessageFromRepository( dataString, body.repository.html_url )
 }
 
 async function sendMessageFromRepository( data, repository )
