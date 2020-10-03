@@ -25,7 +25,7 @@ const gitEventsHandlers = {
     },
 
     pull_request( body ) {
-        let data = `|---PULL-REQUEST---|\nREPOSITORY: ${ body.repository.name }\nUSER: ${ body.sender.login }\nTARGET-BRANCH: ${ body.pull_request.base.ref }\n BRANCH: ${ body.pull_request.head.ref }\n TITLE: ${ body.pull_request.title }\n`
+        let data = `|---PULL-REQUEST---|\nREPOSITORY: ${ body.repository.name }\nUSER: ${ body.sender.login }\nTARGET-BRANCH: ${ body.pull_request.base.ref }\n BRANCH: ${ body.pull_request.head.ref }\n TITLE: ${ body.pull_request.title }\n COMMITS: ${ body.pull_request.commits }\n ADDITIONS: ${ body.pull_request.additions } \n DELETIONS: ${ body.pull_request.deletions } \n CHANGED-FILES: ${  body.pull_request.changed_files }`
     
         switch ( body.action ) {
             case 'opened': 
