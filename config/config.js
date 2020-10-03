@@ -5,4 +5,4 @@ module.exports = {
     TOKEN:process.env.TOKEN,
     SENDMETHOD: process.env.SENDMETHOD,
     APIVERSION: process.env.APIVERSION
-  };
+  }
