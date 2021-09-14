@@ -1,0 +1,44 @@
+{
+  "name": "vk-bot-github",
+  "author": "DanilSord",
+  "version": "1.0.0",
+  "description": "Notifications for VK from GitHub",
+  "license": "MIT",
+  "keywords": [
+    "nodejs",
+    "api",
+    "bot",
+    "vk",
+    "git",
+    "github",
+    "mongodb"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DanilSord/vk-bot-github"
+  },
+  "bugs": {
+    "url": "https://github.com/DanilSord/vk-bot-github/issues"
+  },
+  "homepage": "https://github.com/DanilSord/vk-bot-github",
+  "main": "app/app.js",
+  "scripts": {
+    "start": "node app/app.js",
+    "dev": "nodemon --signal SIGTERM --exec \"node app/app.js\"",
+    "dev-fix": "nodemon --exec \"npm run fix && node app/app.js\"",
+    "lint": "eslint --ignore-path .gitignore .",
+    "fix": "eslint --fix --ignore-path .gitignore ."
+  },
+  "engines": {
+    "node": "^12.9 || 14 || 16"
+  },
+  "dependencies": {
+    "mongoose": "^5.9.15",
+    "querystring": "^0.2.1",
+    "undici": "^4.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "eslint": "^7.8.1"
+  }
+}

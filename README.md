@@ -1,2 +1,2 @@
-# GitBot
-Notifications for VK from GitHub
+# vk-bot-github
+Notifications bot for VK from GitHub
