@@ -26,7 +26,6 @@ async function getMessages( data, repositoryUrl ) {
   for ( const chat of chats ) {
     messeges.push( new VkMessage( data, chat.chatID ) );
   }
-  console.log( chats, messeges );
   return messeges;
 }
 
@@ -65,7 +64,6 @@ module.exports = {
       ${ body.commits[ index ].committer.username ? body.commits[ index ].committer.username
     : body.commits[ index ].committer.name }\n`;
     }
-    console.log( body, body.repository.html_url );
     return getMessages( data, body.repository.html_url );
   },
 
